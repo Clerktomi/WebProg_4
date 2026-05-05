@@ -13,8 +13,8 @@
             <div class="col-4 d-flex align-items-center justify-content-center">
                 <h2 class="text-center bold menu">Étlap</h2>
             </div>
-            <div class="col-8 d-flex align-items-center justify-content-center">
-                <div class="row d-flex align-items-center justify-content-around">
+            <div class="col-8 d-flex align-items-center justify-content-end">
+                <div class="row d-flex align-items-center justify-content-between">
                     <div class="col-3 d-flex align-items-center justify-content-center">
                         <p class="menu"><a href="#">Kosár</a></p>
                     </div>
@@ -38,7 +38,7 @@
                     <h2>Csirkés tortilla</h2>
                     <p>Friss zöldségekkel, fűszeres csirkemellel és joghurtos szósszal töltött tortilla.</p>
                     <h4>1 890 Ft</h4>
-                    <button class="btn btn-primary mx-2 my-2" onclick="termekVesz('csirkes')">Kosárba</button>
+                    <button class="btn btn-primary mx-2 my-2" onclick="termekVesz(0)">Kosárba</button>
                 </div>
             </div>
             <div class="col-md-4">
@@ -46,7 +46,7 @@
                     <h2>Margherita pizza</h2>
                     <p>Klasszikus pizza paradicsomszósszal, mozzarellával és friss bazsalikommal.</p>
                     <h4>2 490 Ft</h4>
-                    <button class="btn btn-primary mx-2 my-2" onclick="termekVesz('margherita')">Kosárba</button>
+                    <button class="btn btn-primary mx-2 my-2" onclick="termekVesz(1)">Kosárba</button>
                 </div>
             </div>
             <div class="col-md-4">
@@ -54,15 +54,36 @@
                     <h2>Sajtburger</h2>
                     <p>Szaftos marhahúspogácsa cheddar sajttal, salátával, paradicsommal és házi szósszal.</p>
                     <h4>2 290 Ft</h4>
-                    <button class="btn btn-primary mx-2 my-2" onclick="termekVesz('sajtburger')">Kosárba</button>
+                    <button class="btn btn-primary mx-2 my-2" onclick="termekVesz(2)">Kosárba</button>
                 </div>
             </div>
         </div>
     </div>
     <script>
 
+        let tavoliKosar = [
+            {nev:"Csirkés tortilla",leiras:"Friss zöldségekkel, fűszeres csirkemellel és joghurtos szósszal töltött tortilla.",ar:1890,i:0,db:0},
+            {nev:"Margherita pizza",leiras:"Klasszikus pizza paradicsomszósszal, mozzarellával és friss bazsalikommal.",ar:2490,i:1,db:0},
+            {nev:"Sajtburger",leiras:"Szaftos marhahúspogácsa cheddar sajttal, salátával, paradicsommal és házi szósszal.",ar:2290,i:2,db:0}
+        ];
+
+        localStorage.setItem("kosar",JSON.stringify(tavoliKosar));
+
+        let kosar = JSON.parse(localStorage.getItem("kosar"));
+
+        if(!kosar){
+            kosar=[];
+        }
+
         function termekVesz(keresId) {
-            
+            for (let i = 0; i < kosar.length; i++) {
+                if(kosar[i].i===keresId){
+                    // alert(kosar[i].nev)
+                    kosar[i].db++;
+                    localStorage.setItem("kosar",JSON.stringify(kosar));
+                }
+                
+            }
         }
     </script>
 </body>
