@@ -21,3 +21,10 @@ body{
 .menu{
     margin: 0;
 }
+
+.termek{
+    background-color: rgba(0, 0, 0, 0.84);
+    border: 1px solid white;
+    padding: 8px;
+    border-radius: 8px;
+}
