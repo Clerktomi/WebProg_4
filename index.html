@@ -60,14 +60,8 @@
     </div>
     <script>
 
-        let Osztermekek = [
-                {nev:"Csirkés tortilla",leiras:"Friss zöldségekkel, fűszeres csirkemellel és joghurtos szósszal töltött tortilla.",ar:1890,i:0,db:0},
-                {nev:"Margherita pizza",leiras:"Klasszikus pizza paradicsomszósszal, mozzarellával és friss bazsalikommal.",ar:2490,i:1,db:0},
-                {nev:"Sajtburger",leiras:"Szaftos marhahúspogácsa cheddar sajttal, salátával, paradicsommal és házi szósszal.",ar:2290,i:2,db:0},
-                {nev:"Cézár saláta",leiras:"Ropogós saláta grillezett csirkével, parmezánnal, krutonnal és cézár öntettel.",ar:1990,i:3,db:0},
-                {nev:"Vegán tál",leiras:"Quinoa, sült zöldségek, csicseriborsó és avokádós öntet egy tápláló tálban.",ar:2190,i:4,db:0},
-                {nev:"Palacsinta Nutellával",leiras:"Frissen sült palacsinta gazdag Nutella töltelékkel és porcukorral.",ar:1290,i:5,db:0}
-        ];
+        let Osztermekek = localStorage.getItem("kosar");
+        Osztermekek=JSON.parse(Osztermekek);
 
         const termekekContainer = document.getElementById("termekek");
         termekekContainer.innerHTML="";

@@ -24,6 +24,9 @@
                         <th>modósít</th>
                     </tr>
                 </thead>
+                <tbody id="adminTable">
+
+                </tbody>
             </table>
         </div>
     <div class="container-fluid w-100" id="footer">
@@ -49,7 +52,69 @@
         </div>
     </div>
     <script>
+        let Osztermekek = localStorage.getItem("kosar");
 
+        const alapTermekek = [
+            {nev:"Csirkés tortilla",leiras:"Friss zöldségekkel, fűszeres csirkemellel és joghurtos szósszal töltött tortilla.",ar:1890,i:0,db:0},
+            {nev:"Margherita pizza",leiras:"Klasszikus pizza paradicsomszósszal, mozzarellával és friss bazsalikommal.",ar:2490,i:1,db:0},
+            {nev:"Sajtburger",leiras:"Szaftos marhahúspogácsa cheddar sajttal, salátával, paradicsommal és házi szósszal.",ar:2290,i:2,db:0},
+            {nev:"Cézár saláta",leiras:"Ropogós saláta grillezett csirkével, parmezánnal, krutonnal és cézár öntettel.",ar:1990,i:3,db:0},
+            {nev:"Vegán tál",leiras:"Quinoa, sült zöldségek, csicseriborsó és avokádós öntet egy tápláló tálban.",ar:2190,i:4,db:0},
+            {nev:"Palacsinta Nutellával",leiras:"Frissen sült palacsinta gazdag Nutella töltelékkel és porcukorral.",ar:1290,i:5,db:0}
+        ];
+
+        if (Osztermekek) {
+            Osztermekek = JSON.parse(Osztermekek);
+
+            if (Osztermekek.length === 0) {
+                Osztermekek = alapTermekek;
+                localStorage.setItem("kosar", JSON.stringify(Osztermekek));
+            }
+
+        } else {
+            Osztermekek = alapTermekek;
+            localStorage.setItem("kosar", JSON.stringify(Osztermekek));
+        }
+
+        let termekek = localStorage.getItem("kosar");
+        const adminTable = document.getElementById("adminTable");
+
+        adminTable.innerHTML="";
+        if(termekek){
+            termekek = JSON.parse(termekek);
+            
+            for (let i = 0; i < termekek.length; i++) {
+                let uj = `
+                <tr>
+                    <td>${termekek[i].nev}</td>
+                    <td>${termekek[i].leiras}</td>
+                    <td>${Number(termekek[i].ar).toLocaleString('hu-HU')}Ft.</td>
+                    <td>
+                        <div class="row">
+                            <div class="col-6">
+                                <button class="btn btn-warning m-2" onclick="">módosítás</button>
+                            </div>
+                            <div class="col-6">
+                                <button class="btn btn-danger m-2" onclick="adminTorol(${i})">Törlés</button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                 `;
+                adminTable.innerHTML+=uj;
+                
+            }
+        }
+
+        function adminTorol(i){
+            let kosar = localStorage.getItem("kosar");
+            kosar = JSON.parse(kosar);
+
+            kosar.splice(i,1);
+
+            localStorage.setItem("kosar",JSON.stringify(kosar));
+            location.reload();
+        }
     </script>
 </body>
 </html>
