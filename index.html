@@ -33,60 +33,7 @@
             </div>
         </div>
         <div class="row g-3 my-4" id="termekek">
-            <div class="col-md-4">
-                <div class="termek">
-                    <h2>Csirkés tortilla</h2>
-                    <p>Friss zöldségekkel, fűszeres csirkemellel és joghurtos szósszal töltött tortilla.</p>
-                    <h4>1 890 Ft</h4>
-                    <hr>
-                    <button class="btn btn-primary mx-2 my-2" onclick="termekVesz(0)">Kosárba</button>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="termek">
-                    <h2>Margherita pizza</h2>
-                    <p>Klasszikus pizza paradicsomszósszal, mozzarellával és friss bazsalikommal.</p>
-                    <h4>2 490 Ft</h4>
-                    <hr>
-                    <button class="btn btn-primary mx-2 my-2" onclick="termekVesz(1)">Kosárba</button>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="termek">
-                    <h2>Sajtburger</h2>
-                    <p>Szaftos marhahúspogácsa cheddar sajttal, salátával, paradicsommal és házi szósszal.</p>
-                    <h4>2 290 Ft</h4>
-                    <hr>
-                    <button class="btn btn-primary mx-2 my-2" onclick="termekVesz(2)">Kosárba</button>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="termek">
-                    <h2>Cézár saláta</h2>
-                    <p>Ropogós saláta grillezett csirkével, parmezánnal, krutonnal és cézár öntettel.</p>
-                    <h4>1 990 Ft</h4>
-                    <hr>
-                    <button class="btn btn-primary mx-2 my-2" onclick="termekVesz(3)">Kosárba</button>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="termek">
-                    <h2>Vegán tál</h2>
-                    <p>Quinoa, sült zöldségek, csicseriborsó és avokádós öntet egy tápláló tálban.</p>
-                    <h4>2 190 Ft</h4>
-                    <hr>
-                    <button class="btn btn-primary mx-2 my-2" onclick="termekVesz(4)">Kosárba</button>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="termek">
-                    <h2>Palacsinta Nutellával</h2>
-                    <p>Frissen sült palacsinta gazdag Nutella töltelékkel és porcukorral.</p>
-                    <h4>1 290 Ft</h4>
-                    <hr>
-                    <button class="btn btn-primary mx-2 my-2" onclick="termekVesz(5)">Kosárba</button>
-                </div>
-            </div>
+            
         </div>
     </div>
     <div class="container-fluid w-100" id="footer">
@@ -113,6 +60,32 @@
     </div>
     <script>
 
+        let Osztermekek = [
+                {nev:"Csirkés tortilla",leiras:"Friss zöldségekkel, fűszeres csirkemellel és joghurtos szósszal töltött tortilla.",ar:1890,i:0,db:0},
+                {nev:"Margherita pizza",leiras:"Klasszikus pizza paradicsomszósszal, mozzarellával és friss bazsalikommal.",ar:2490,i:1,db:0},
+                {nev:"Sajtburger",leiras:"Szaftos marhahúspogácsa cheddar sajttal, salátával, paradicsommal és házi szósszal.",ar:2290,i:2,db:0},
+                {nev:"Cézár saláta",leiras:"Ropogós saláta grillezett csirkével, parmezánnal, krutonnal és cézár öntettel.",ar:1990,i:3,db:0},
+                {nev:"Vegán tál",leiras:"Quinoa, sült zöldségek, csicseriborsó és avokádós öntet egy tápláló tálban.",ar:2190,i:4,db:0},
+                {nev:"Palacsinta Nutellával",leiras:"Frissen sült palacsinta gazdag Nutella töltelékkel és porcukorral.",ar:1290,i:5,db:0}
+        ];
+
+        const termekekContainer = document.getElementById("termekek");
+        termekekContainer.innerHTML="";
+        for (let i = 0; i < Osztermekek.length; i++) {
+            let uj = `
+                <div class="col-md-4">
+                    <div class="termek">
+                            <h2>${Osztermekek[i].nev}</h2>
+                            <p>${Osztermekek[i].leiras}</p>
+                            <h4>${Number(Osztermekek[i].ar).toLocaleString('hu-HU')}Ft.</h4>
+                            <hr>
+                        <button class="btn btn-primary mx-2 my-2" onclick="termekVesz(${i})">Kosárba</button>
+                    </div>
+                </div>
+            `;
+            termekekContainer.innerHTML+= uj;
+        }
+
         let kosarTolt = localStorage.getItem("kosar");
         let tavoliKosar = [];
         const kosarDB = document.getElementById("kosarDB");
@@ -120,14 +93,7 @@
         if(kosarTolt){
             tavoliKosar = JSON.parse(kosarTolt);
         } else{
-            tavoliKosar = [
-                {nev:"Csirkés tortilla",leiras:"Friss zöldségekkel, fűszeres csirkemellel és joghurtos szósszal töltött tortilla.",ar:1890,i:0,db:0},
-                {nev:"Margherita pizza",leiras:"Klasszikus pizza paradicsomszósszal, mozzarellával és friss bazsalikommal.",ar:2490,i:1,db:0},
-                {nev:"Sajtburger",leiras:"Szaftos marhahúspogácsa cheddar sajttal, salátával, paradicsommal és házi szósszal.",ar:2290,i:2,db:0},
-                {nev:"Cézár saláta",leiras:"Ropogós saláta grillezett csirkével, parmezánnal, krutonnal és cézár öntettel.",ar:1990,i:3,db:0},
-                {nev:"Vegán tál",leiras:"Quinoa, sült zöldségek, csicseriborsó és avokádós öntet egy tápláló tálban.",ar:2190,i:4,db:0},
-                {nev:"Palacsinta Nutellával",leiras:"Frissen sült palacsinta gazdag Nutella töltelékkel és porcukorral.",ar:1290,i:5,db:0}
-            ];
+            tavoliKosar = Osztermekek;
         }
 
 
