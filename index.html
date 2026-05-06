@@ -16,7 +16,7 @@
             <div class="col-10">
                 <div class="row d-flex align-items-center justify-content-around">
                     <div class="col-3 d-flex align-items-center justify-content-center">
-                        <p class="menu"><a href="kosar.html">Kosár</a></p>
+                        <p class="menu"><a href="kosar.html">Kosár</a><p id="kosarDB" class="red">0</p></p>
                     </div>
                     <div class="col-3 d-flex align-items-center justify-content-center">
                         <p class="menu"><a href="#">Rendelés Leadása</a></p>
@@ -115,6 +115,7 @@
 
         let kosarTolt = localStorage.getItem("kosar");
         let tavoliKosar = [];
+        const kosarDB = document.getElementById("kosarDB");
 
         if(kosarTolt){
             tavoliKosar = JSON.parse(kosarTolt);
@@ -138,14 +139,24 @@
             kosar=[];
         }
 
+        let osszesDb = 0;
+        for (let i = 0; i < kosar.length; i++) {
+            osszesDb+=kosar[i].db;
+        }
+        kosarDB.textContent=osszesDb;
+
         function termekVesz(keresId) {
+            let osszesDb = 0;
             for (let i = 0; i < kosar.length; i++) {
+                osszesDb+=kosar[i].db;
                 if(kosar[i].i ===keresId){
                     // alert(kosar[i].nev)
                     kosar[i].db++;
                     localStorage.setItem("kosar",JSON.stringify(kosar));
+                    location.reload();
                 }
             }
+            kosarDB.textContent=osszesDb;
         }
     </script>
 </body>
