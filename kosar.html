@@ -46,6 +46,12 @@
 
                 </tbody>
             </table>
+            <div class="row d-flex align-items-center justify-content-end">
+                <div class="col-4 d-flex align-items-center justify-content-end fixr">
+                    <p class="text-end vegosszegSzoveg" id="vegosszeg"></p>
+                    <a class="btn btn-primary" href="#">Rendelés leadása</a>
+                </div>
+            </div>
         </div>
     </div>
     <div class="container-fluid w-100" id="footer">
@@ -72,6 +78,7 @@
     </div>
     <script>
         const kosarTermekek = document.getElementById("kosarTermekek");
+        const vegosszegP = document.getElementById("vegosszeg");
 
         let kosar = localStorage.getItem("kosar");
 
@@ -80,6 +87,8 @@
         } else{
             kosar = [];
         }
+
+        let vegOssz = 0;
 
         for (let i = 0; i < kosar.length; i++) {
             if(kosar[i].db>0){
@@ -91,9 +100,11 @@
                         <td>${Number(kosar[i].db*kosar[i].ar).toLocaleString('hu-HU')}Ft.</td>
                     </tr>
                 `;
+                vegOssz+=kosar[i].db*kosar[i].ar;
                 kosarTermekek.innerHTML+=uj;
             }
         }
+        vegosszegP.textContent = "Összesen: " + vegOssz.toLocaleString("hu-Hu")+"Ft.";
     </script>
 </body>
 </html>
