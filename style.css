@@ -35,3 +35,13 @@ body{
     padding-bottom: 50px;
     background-color: rgba(0, 0, 0, 0.84);
 }
+
+a{
+    text-decoration: none;
+    margin: 0;
+    color: white;
+}
+
+a:hover{
+    color: rgb(0, 123, 255);
+}

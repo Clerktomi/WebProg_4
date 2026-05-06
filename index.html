@@ -10,11 +10,11 @@
 <body>
     <div class="container">
         <div class="row p-2" id="header">
-            <div class="col-4 d-flex align-items-center justify-content-center">
+            <div class="col-2 d-flex align-items-center justify-content-center">
                 <h2 class="text-center bold menu">Étlap</h2>
             </div>
-            <div class="col-8 d-flex align-items-center justify-content-end">
-                <div class="row d-flex align-items-center justify-content-between">
+            <div class="col-10">
+                <div class="row d-flex align-items-center justify-content-around">
                     <div class="col-3 d-flex align-items-center justify-content-center">
                         <p class="menu"><a href="#">Kosár</a></p>
                     </div>
@@ -22,11 +22,11 @@
                         <p class="menu"><a href="#">Rendelés Leadása</a></p>
                     </div>
                     <div class="col-3 d-flex align-items-center justify-content-center">
-                        <p class="menu">Test</p>
+                        <p class="menu"><a href="#">Főoldal</a></p>
                         
                     </div>
                     <div class="col-3 d-flex align-items-center justify-content-center">
-                        <p class="menu">Test</p>
+                        <p class="menu"><a href="#">kontakt</a></p>
 
                     </div>
                 </div>
@@ -58,6 +58,33 @@
                     <h4>2 290 Ft</h4>
                     <hr>
                     <button class="btn btn-primary mx-2 my-2" onclick="termekVesz(2)">Kosárba</button>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="termek">
+                    <h2>Cézár saláta</h2>
+                    <p>Ropogós saláta grillezett csirkével, parmezánnal, krutonnal és cézár öntettel.</p>
+                    <h4>1 990 Ft</h4>
+                    <hr>
+                    <button class="btn btn-primary mx-2 my-2" onclick="termekVesz(3)">Kosárba</button>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="termek">
+                    <h2>Vegán tál</h2>
+                    <p>Quinoa, sült zöldségek, csicseriborsó és avokádós öntet egy tápláló tálban.</p>
+                    <h4>2 190 Ft</h4>
+                    <hr>
+                    <button class="btn btn-primary mx-2 my-2" onclick="termekVesz(4)">Kosárba</button>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="termek">
+                    <h2>Palacsinta Nutellával</h2>
+                    <p>Frissen sült palacsinta gazdag Nutella töltelékkel és porcukorral.</p>
+                    <h4>1 290 Ft</h4>
+                    <hr>
+                    <button class="btn btn-primary mx-2 my-2" onclick="termekVesz(5)">Kosárba</button>
                 </div>
             </div>
         </div>
@@ -95,7 +122,10 @@
             tavoliKosar = [
                 {nev:"Csirkés tortilla",leiras:"Friss zöldségekkel, fűszeres csirkemellel és joghurtos szósszal töltött tortilla.",ar:1890,i:0,db:0},
                 {nev:"Margherita pizza",leiras:"Klasszikus pizza paradicsomszósszal, mozzarellával és friss bazsalikommal.",ar:2490,i:1,db:0},
-                {nev:"Sajtburger",leiras:"Szaftos marhahúspogácsa cheddar sajttal, salátával, paradicsommal és házi szósszal.",ar:2290,i:2,db:0}
+                {nev:"Sajtburger",leiras:"Szaftos marhahúspogácsa cheddar sajttal, salátával, paradicsommal és házi szósszal.",ar:2290,i:2,db:0},
+                {nev:"Cézár saláta",leiras:"Ropogós saláta grillezett csirkével, parmezánnal, krutonnal és cézár öntettel.",ar:1990,i:3,db:0},
+                {nev:"Vegán tál",leiras:"Quinoa, sült zöldségek, csicseriborsó és avokádós öntet egy tápláló tálban.",ar:2190,i:4,db:0},
+                {nev:"Palacsinta Nutellával",leiras:"Frissen sült palacsinta gazdag Nutella töltelékkel és porcukorral.",ar:1290,i:5,db:0}
             ];
         }
 
@@ -115,7 +145,6 @@
                     kosar[i].db++;
                     localStorage.setItem("kosar",JSON.stringify(kosar));
                 }
-                
             }
         }
     </script>
