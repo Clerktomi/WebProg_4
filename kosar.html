@@ -32,7 +32,8 @@
                 </div>
             </div>
         </div>
-        <div class="row my-4">
+        <h3 class="text-center" id="kosarAlert">Jelenleg üres kosara!</h3>
+        <div class="row my-4" id="foKosar">
             <table>
                 <thead>
                     <tr>
@@ -40,6 +41,7 @@
                         <th>Darab</th>
                         <th>Ár</th>
                         <th>Részösszeg</th>
+                        <th>Kezelés</th>
                     </tr>
                 </thead>
                 <tbody id="kosarTermekek">
@@ -79,6 +81,8 @@
     <script>
         const kosarTermekek = document.getElementById("kosarTermekek");
         const vegosszegP = document.getElementById("vegosszeg");
+        const foKosar = document.getElementById("foKosar");
+        const kosarAlert = document.getElementById("kosarAlert");
 
         let kosar = localStorage.getItem("kosar");
 
@@ -98,6 +102,7 @@
                         <td>${kosar[i].db}</td>
                         <td>${Number(kosar[i].ar).toLocaleString('hu-HU')}Ft.</td>
                         <td>${Number(kosar[i].db*kosar[i].ar).toLocaleString('hu-HU')}Ft.</td>
+                        <td class="p-2"><button class="btn btn-danger" onclick="torol(${i})">Törlés</button></td>
                     </tr>
                 `;
                 vegOssz+=kosar[i].db*kosar[i].ar;
@@ -105,6 +110,25 @@
             }
         }
         vegosszegP.textContent = "Összesen: " + vegOssz.toLocaleString("hu-Hu")+"Ft.";
+
+        if(vegOssz>0){
+            foKosar.style.display="block";
+            kosarAlert.textContent="";
+        } else{
+            foKosar.style.display="none";
+            kosarAlert.textContent="Jelenleg üres kosara!";
+        }
+
+        function torol(i){
+            let kosar = localStorage.getItem("kosar");
+
+            if(kosar){
+                kosar = JSON.parse(kosar);
+                kosar[i].db = 0;
+                localStorage.setItem("kosar",JSON.stringify(kosar));
+                location.reload();
+            }
+        }
     </script>
 </body>
 </html>
