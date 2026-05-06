@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Étlap</title>
+    <title>Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -13,6 +13,14 @@
             <div class="col-12 d-flex align-items-center justify-content-center">
                 <h2 class="text-center bold menu">Admin</h2>
             </div>
+        </div>
+        <div class="row my-2" id="modositresz" style="display: none;">
+            <form id="modositForm" class="row w-50 d-flex align-items-center justify-content-center">
+                <input type="text" placeholder="Új név:" id="ujNev" class="my-3 form-control" required>
+                <input type="text" placeholder="Új leírás:" id="ujLeiras" class="my-3 form-control" required>
+                <input type="number" placeholder="Új ár:" id="ujAr" class="my-3 form-control" required>
+                <button class="btn btn-success my-3" type="submit" onclick="adminJovahagy()">Jóváhagy</button>
+            </form>
         </div>
         <div class="row my-4">
             <table>
@@ -28,6 +36,15 @@
 
                 </tbody>
             </table>
+            <div class="row my-2" id="ujtermekResz" style="display: none;">
+                <form id="ujTermekForm" class="row w-50 d-flex align-items-center justify-content-center">
+                    <input type="text" placeholder="Új név:" id="felveszNev" class="my-3 form-control" required>
+                    <input type="text" placeholder="Új leírás:" id="felveszLeiras" class="my-3 form-control" required>
+                    <input type="number" placeholder="Új ár:" id="felveszAr" class="my-3 form-control" required>
+                    <button class="btn btn-success my-3" type="submit" onclick="termekFeltolt()">Jóváhagy</button>
+                </form>
+            </div>
+            <button class="btn btn-success my-3 w-25" onclick="ujTermek()">Új termék hozzáadása</button>
         </div>
     <div class="container-fluid w-100" id="footer">
         <div class="row d-flex align-items-center justify-content-around">
@@ -78,6 +95,7 @@
 
         let termekek = localStorage.getItem("kosar");
         const adminTable = document.getElementById("adminTable");
+        const modositresz = document.getElementById("modositresz");
 
         adminTable.innerHTML="";
         if(termekek){
@@ -92,7 +110,7 @@
                     <td>
                         <div class="row">
                             <div class="col-6">
-                                <button class="btn btn-warning m-2" onclick="">módosítás</button>
+                                <button class="btn btn-warning m-2" onclick="adminModosit(${i})">módosítás</button>
                             </div>
                             <div class="col-6">
                                 <button class="btn btn-danger m-2" onclick="adminTorol(${i})">Törlés</button>
@@ -114,6 +132,59 @@
 
             localStorage.setItem("kosar",JSON.stringify(kosar));
             location.reload();
+        }
+
+        let modIndex = 0;
+        function adminModosit(i){
+            modIndex = i;
+            modositresz.style.display="block";
+        }
+
+        function adminJovahagy(){
+            let i = modIndex;
+
+            let nev = document.getElementById("ujNev").value;
+            let leiras = document.getElementById("ujLeiras").value;
+            let ar = document.getElementById("ujAr").value;
+
+            let kosar = localStorage.getItem("kosar");
+            kosar = JSON.parse(kosar);
+
+            kosar[i].nev = nev;
+            kosar[i].leiras = leiras;
+            kosar[i].ar = ar;
+
+            localStorage.setItem("kosar",JSON.stringify(kosar));
+            location.reload();
+            modositresz.style.display="none";
+        }
+
+        const ujtermekResz = document.getElementById("ujtermekResz");
+
+        function ujTermek(){
+            ujtermekResz.style.display="block";
+        }
+
+        function termekFeltolt(){
+            let nev = document.getElementById("felveszNev").value;
+            let leiras = document.getElementById("felveszLeiras").value;
+            let ar = document.getElementById("felveszAr").value;
+
+            let kosar = localStorage.getItem("kosar");
+            kosar = JSON.parse(kosar);
+
+            let uj = {
+                nev:nev,
+                leiras:leiras,
+                ar:ar,
+                i:kosar.length,
+                db:0
+            };
+
+            kosar.push(uj);
+
+            localStorage.setItem("kosar",JSON.stringify(kosar));
+            ujtermekResz.style.display="none";
         }
     </script>
 </body>
