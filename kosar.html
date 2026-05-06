@@ -102,7 +102,19 @@
                         <td>${kosar[i].db}</td>
                         <td>${Number(kosar[i].ar).toLocaleString('hu-HU')}Ft.</td>
                         <td>${Number(kosar[i].db*kosar[i].ar).toLocaleString('hu-HU')}Ft.</td>
-                        <td class="p-2"><button class="btn btn-danger" onclick="torol(${i})">Törlés</button></td>
+                        <td class="p-2">
+                            <div class="row">
+                                <div class="col-4 d-flex align-items-center justify-content-center">
+                                    <button class="btn btn-success" onclick="modosit(${i})">+</button>
+                                </div>
+                                <div class="col-4 d-flex align-items-center justify-content-center">
+                                    <button class="btn btn-danger" onclick="modosit(${i})">-</button>
+                                </div>
+                                <div class="col-4 d-flex align-items-center justify-content-center">
+                                    <button class="btn btn-danger" onclick="torol(${i})">Törlés</button>
+                                </div>
+                            </div>
+                        </td>
                     </tr>
                 `;
                 vegOssz+=kosar[i].db*kosar[i].ar;
@@ -128,6 +140,10 @@
                 localStorage.setItem("kosar",JSON.stringify(kosar));
                 location.reload();
             }
+        }
+
+        function modosit(i){
+            alert(i);
         }
     </script>
 </body>
