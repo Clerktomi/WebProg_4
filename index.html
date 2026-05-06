@@ -33,6 +33,9 @@
                 </div>
             </div>
         </div>
+        <div class="row d-flex align-items-center justify-content-center my-2">
+            <input type="text" class="form-control w-50" placeholder="Keresés:" id="search">
+        </div>
         <div class="row g-3 my-4" id="termekek">
             
         </div>
@@ -119,6 +122,41 @@
             }
             kosarDB.textContent=osszesDb;
         }
+
+    const searchInput = document.getElementById("search");
+
+    function termekekKeres(lista) {
+        termekekContainer.innerHTML = "";
+
+        lista.forEach((termek) => {
+            let uj = `
+                <div class="col-md-4">
+                    <div class="termek">
+                        <h2>${termek.nev}</h2>
+                        <p>${termek.leiras}</p>
+                        <h4>${Number(termek.ar).toLocaleString('hu-HU')}Ft.</h4>
+                        <hr>
+                        <button class="btn btn-primary mx-2 my-2" onclick="termekVesz(${termek.i})">Kosárba</button>
+                    </div>
+                </div>
+            `;
+
+            termekekContainer.innerHTML += uj;
+        });
+    }
+
+    termekekKeres(Osztermekek);
+
+    searchInput.addEventListener("input", () => {
+        const keresettSzoveg = searchInput.value.toLowerCase();
+
+        const talalatok = Osztermekek.filter((termek) =>
+            termek.nev.toLowerCase().includes(keresettSzoveg) ||
+            termek.leiras.toLowerCase().includes(keresettSzoveg)
+        );
+
+        termekekKeres(talalatok);
+    });
     </script>
 </body>
 </html>
