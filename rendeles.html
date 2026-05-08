@@ -33,9 +33,11 @@
                 </div>
             </div>
         </div> 
+        <h2 class="text-center" id="ures"></h2>
         <div class="row g-3 my-4 d-flex align-items-center justify-content-center">
             <div id="mainT">
-                <form id="rendelForm" class="row w-50 d-flex align-items-center justify-content-center">
+               <div class="col-12 d-flex align-items-center justify-content-center">
+                 <form id="rendelForm" class="row w-50 d-flex align-items-center justify-content-center">
                     <input type="text" placeholder="Teljes név:" id="nev" required class="form-control my-2">
                     <input type="email" placeholder="E-mail:" id="email" required class="form-control my-2">
                     <input type="text" placeholder="Telefonszám: pl. +36" id="tel" required class="form-control my-2">
@@ -52,7 +54,11 @@
                     <div class="row d-flex align-items-center justify-content-center">
                         <button class="btn btn-success my-2 w-25" type="submit">Rendelés leadása</button>
                     </div>
+                    <div class="row">
+                        <p id="rendelAlert"></p>
+                    </div>
                 </form>
+               </div>
             </div>
             </div>
     </div>
@@ -98,8 +104,10 @@
 
         if(osszesDb===0){
             document.getElementById("mainT").style.display = "none";
+            document.getElementById("ures").textContent = "Jelenleg üres a kosara!";
         } else{
             document.getElementById("mainT").style.display = "flex";
+            document.getElementById("ures").textContent = "";
         }
 
 
@@ -108,6 +116,42 @@
         let tel = document.getElementById("tel");
         let telepules = document.getElementById("telepules");
         let utca = document.getElementById("utca");
+
+        const rendelAlert = document.getElementById("rendelAlert");
+
+        rendelForm.addEventListener("submit", function(even){
+            even.preventDefault();
+            // alert("jo")
+
+            nev = nev.value;
+            email = email.value;
+            tel = tel.value;
+            telepules = telepules.value;
+            utca = utca.value;
+
+            let rendelesek = localStorage.getItem("rendelesek");
+
+            if(rendelesek){
+                rendelesek = JSON.parse(rendelesek);
+            }else{
+                rendelesek = [];
+            }
+
+            let ujRendel = {
+                nev:nev,
+                email:email,
+                tel:tel,
+                telepules:telepules,
+                utca,utca,
+                azonosito: Math.floor(Math.random() * 1000) + 1
+            };
+
+            rendelesek.push(ujRendel);
+
+            localStorage.setItem("rendelesek",JSON.stringify(rendelesek));
+
+            rendelAlert.textContent = "A rendelésed megkaptuk azonosító: " + ujRendel.azonosito;
+        });
 
     </script>
 </body>
