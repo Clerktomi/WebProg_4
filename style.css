@@ -71,3 +71,12 @@ table{
 .red{
     color: red;
 }
+
+.kot{
+    background-color: black;
+    border-radius: 5px;
+}
+
+.no-margin{
+    margin: 0;
+}
