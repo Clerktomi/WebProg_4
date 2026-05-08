@@ -12,29 +12,40 @@
     <div class="container">
         <div class="row p-2" id="header">
             <div class="col-2 d-flex align-items-center justify-content-center">
-                <h2 class="text-center bold menu">Étlap</h2>
+                <h2 class="text-center bold menu">kontakt</h2>
             </div>
             <div class="col-10">
                 <div class="row d-flex align-items-center justify-content-around">
-                    <div class="col-3 d-flex align-items-center justify-content-center">
-                        <p class="menu"><a href="kosar.html">Kosár</a><p id="kosarDB" class="red">0</p></p>
-                    </div>
+
                     <div class="col-3 d-flex align-items-center justify-content-center">
                         <p class="menu"><a href="fooldal.html">Főoldal</a></p>
                         
                     </div>
-                    <div class="col-3 d-flex align-items-center justify-content-center">
-                        <p class="menu"><a href="kontakt.html">kontakt</a></p>
-
-                    </div>
                 </div>
             </div>
         </div>
-        <div class="row d-flex align-items-center justify-content-center my-2">
-            <input type="text" class="form-control w-50" placeholder="Keresés:" id="search">
-        </div>
-        <div class="row g-3 my-4" id="termekek">
-            
+        <div class="row g-3 my-4">
+            <div class="col-4 termek">
+                <img src="src/nad.jpg" alt="munkas" class="w-100 rounded">
+                <h4>Nádás (szakács)</h4>
+                <p>az ő eledele oly finom, mikor megkostolod haza is indulsz</p>
+            </div>
+            <div class="col-4 termek">
+                <img src="src/ceca.gif" alt="munkas" class="w-100 rounded">
+                <h4>Lil meow (pincér)</h4>
+                <p>ha nem adsz borra valót, azonnal hívja Nádast (roblox alert)</p>
+                <ul>
+                    <li>okos</li>
+                    <li>Hülye</li>
+                    <li>Nyávog</li>
+                    <li>Ugat</li>
+                </ul>
+            </div>
+            <div class="col-4 termek">
+                <img src="src/bartos.jpg" alt="munkas" class="w-100 rounded">
+                <h4>Bartos (👑BOSS👑)</h4>
+                <p>ha nem adsz borra valót, azonnal hívja Nádast (roblox alert)</p>
+            </div>
         </div>
     </div>
     <div class="container-fluid w-100" id="footer">
@@ -61,99 +72,6 @@
     </div>
     <script>
 
-        let Osztermekek = localStorage.getItem("kosar");
-        Osztermekek=JSON.parse(Osztermekek);
-
-        const termekekContainer = document.getElementById("termekek");
-        termekekContainer.innerHTML="";
-        for (let i = 0; i < Osztermekek.length; i++) {
-            let uj = `
-                <div class="col-md-4">
-                    <div class="termek">
-                            <h2>${Osztermekek[i].nev}</h2>
-                            <p>${Osztermekek[i].leiras}</p>
-                            <h4>${Number(Osztermekek[i].ar).toLocaleString('hu-HU')}Ft.</h4>
-                            <hr>
-                        <button class="btn btn-primary mx-2 my-2" onclick="termekVesz(${i})">Kosárba</button>
-                    </div>
-                </div>
-            `;
-            termekekContainer.innerHTML+= uj;
-        }
-
-        let kosarTolt = localStorage.getItem("kosar");
-        let tavoliKosar = [];
-        const kosarDB = document.getElementById("kosarDB");
-
-        if(kosarTolt){
-            tavoliKosar = JSON.parse(kosarTolt);
-        } else{
-            tavoliKosar = Osztermekek;
-        }
-
-
-        localStorage.setItem("kosar",JSON.stringify(tavoliKosar));
-
-        let kosar = JSON.parse(localStorage.getItem("kosar"));
-
-        if(!kosar){
-            kosar=[];
-        }
-
-        let osszesDb = 0;
-        for (let i = 0; i < kosar.length; i++) {
-            osszesDb+=kosar[i].db;
-        }
-        kosarDB.textContent=osszesDb;
-
-        function termekVesz(keresId) {
-            let osszesDb = 0;
-            for (let i = 0; i < kosar.length; i++) {
-                osszesDb+=kosar[i].db;
-                if(kosar[i].i ===keresId){
-                    // alert(kosar[i].nev)
-                    kosar[i].db++;
-                    localStorage.setItem("kosar",JSON.stringify(kosar));
-                    location.reload();
-                }
-            }
-            kosarDB.textContent=osszesDb;
-        }
-
-    const searchInput = document.getElementById("search");
-
-    function termekekKeres(lista) {
-        termekekContainer.innerHTML = "";
-
-        lista.forEach((termek) => {
-            let uj = `
-                <div class="col-md-4">
-                    <div class="termek">
-                        <h2>${termek.nev}</h2>
-                        <p>${termek.leiras}</p>
-                        <h4>${Number(termek.ar).toLocaleString('hu-HU')}Ft.</h4>
-                        <hr>
-                        <button class="btn btn-primary mx-2 my-2" onclick="termekVesz(${termek.i})">Kosárba</button>
-                    </div>
-                </div>
-            `;
-
-            termekekContainer.innerHTML += uj;
-        });
-    }
-
-    termekekKeres(Osztermekek);
-
-    searchInput.addEventListener("input", () => {
-        const keresettSzoveg = searchInput.value.toLowerCase();
-
-        const talalatok = Osztermekek.filter((termek) =>
-            termek.nev.toLowerCase().includes(keresettSzoveg) ||
-            termek.leiras.toLowerCase().includes(keresettSzoveg)
-        );
-
-        termekekKeres(talalatok);
-    });
     </script>
 </body>
 </html>
