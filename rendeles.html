@@ -117,17 +117,19 @@
         let telepules = document.getElementById("telepules");
         let utca = document.getElementById("utca");
 
+        const rendelElfogad = document.getElementById("rendelElfogad");
+
         const rendelAlert = document.getElementById("rendelAlert");
 
         rendelForm.addEventListener("submit", function(even){
             even.preventDefault();
             // alert("jo")
 
-            nev = nev.value;
-            email = email.value;
-            tel = tel.value;
-            telepules = telepules.value;
-            utca = utca.value;
+            let nevErtek = nev.value;
+            let emailErtek = email.value;
+            let telErtek = tel.value;
+            let telepulesErtek = telepules.value;
+            let utcaErtek = utca.value;
 
             let rendelesek = localStorage.getItem("rendelesek");
 
@@ -137,20 +139,51 @@
                 rendelesek = [];
             }
 
-            let ujRendel = {
-                nev:nev,
-                email:email,
-                tel:tel,
-                telepules:telepules,
-                utca,utca,
-                azonosito: Math.floor(Math.random() * 1000) + 1
-            };
+            if (rendelElfogad.checked){
+                let ujRendel = {
+                    nev: nevErtek,
+                    email: emailErtek,
+                    tel: telErtek,
+                    telepules: telepulesErtek,
+                    utca, utcaErtek,
+                    azonosito: Math.floor(Math.random() * 1000) + 1
+                };
 
-            rendelesek.push(ujRendel);
+                rendelesek.push(ujRendel);
 
-            localStorage.setItem("rendelesek",JSON.stringify(rendelesek));
+                localStorage.setItem("rendelesek", JSON.stringify(rendelesek));
 
-            rendelAlert.textContent = "A rendelésed megkaptuk azonosító: " + ujRendel.azonosito;
+                rendelAlert.textContent = "A rendelésed megkaptuk azonosító: " + ujRendel.azonosito;
+                rendelForm.reset();
+
+                let kosar = localStorage.getItem("kosar");
+
+                if (kosar) {
+                    kosar = JSON.parse(kosar);
+                    for (let i = 0; i < kosar.length; i++) {
+                        kosar[i].db = 0;
+                    }
+                    localStorage.setItem("kosar", JSON.stringify(kosar));
+
+                    alert("sikeres rendelés");
+
+                    setTimeout(() => {
+                        location.reload();
+                    }, 2000);
+                }
+            } else{
+                rendelAlert.style.color = "red";
+                rendelAlert.style.fontWeight="bold";
+                rendelAlert.style.background="black";
+                rendelAlert.textContent = "Kérjük fogadja el a kötelezetségét!";
+
+                setTimeout(() => {
+                    rendelAlert.style.color = "white";
+                    rendelAlert.style.fontWeight="";
+                    rendelAlert.style.background="";
+                    rendelAlert.textContent = "";
+                }, 3000);
+            }
         });
 
     </script>

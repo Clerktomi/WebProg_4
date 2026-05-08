@@ -54,6 +54,25 @@
             </div>
             <button class="btn btn-success my-3 w-25" onclick="ujTermek()">Új termék hozzáadása</button>
         </div>
+    <div class="row">
+        <div id="megrendelDiv">
+            <h3>Aktív megrendlések</h3>
+            <p id="aktivAlert"></p>
+            <table class="w-100">
+                <thead>
+                    <tr>
+                        <th>Név</th>
+                        <th>Tel.szám</th>
+                        <th>cím</th>
+                        <th>Azonosító</th>
+                    </tr>
+                </thead>
+                <tbody id="rendelTable">
+    
+                </tbody>
+            </table>
+        </div>
+    </div>
     <div class="container-fluid w-100" id="footer">
         <div class="row d-flex align-items-center justify-content-around">
             <div class="col-4 d-flex align-items-center justify-content-center">
@@ -193,6 +212,33 @@
 
             localStorage.setItem("kosar",JSON.stringify(kosar));
             ujtermekResz.style.display="none";
+        }
+
+        const rendelTable = document.getElementById("rendelTable");
+
+        let megrendelesek = localStorage.getItem("rendelesek");
+
+        if(megrendelesek){
+            megrendelesek = JSON.parse(megrendelesek);
+            document.getElementById("megrendelDiv").style.display="block";
+            document.getElementById("aktivAlert").textContent="";
+        } else{
+            megrendelesek = [];
+            document.getElementById("megrendelDiv").style.display="none";
+            document.getElementById("aktivAlert").textContent="Jelenleg nincs aktív megrendelés";
+        }
+
+        rendelTable.innerHTML="";
+        for (let i = 0; i < megrendelesek.length; i++) {
+            let uj = `
+                <tr>
+                    <td>${megrendelesek[i].nev}</td>
+                    <td>${megrendelesek[i].tel}</td>
+                    <td>${megrendelesek[i].telepules + ", " + megrendelesek[i].utca}</td>
+                    <td>${megrendelesek[i].azonosito}</td>
+                </tr> 
+            `;
+            rendelTable.innerHTML += uj;     
         }
     </script>
 </body>
