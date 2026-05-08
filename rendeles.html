@@ -34,25 +34,27 @@
             </div>
         </div> 
         <div class="row g-3 my-4 d-flex align-items-center justify-content-center">
-            <form id="rendelForm" class="row w-50 d-flex align-items-center justify-content-center">
-                <input type="text" placeholder="Teljes név:" id="nev" required class="form-control my-2">
-                <input type="email" placeholder="E-mail:" id="email" required class="form-control my-2">
-                <input type="text" placeholder="Telefonszám: pl. +36" id="tel" required class="form-control my-2">
-                <input type="text" placeholder="Település:" id="telepules" required class="form-control my-2">
-                <input type="text" placeholder="Utca, házszám:" id="utca" required class="form-control my-2">
-                <div class="row kot w-100 p-2">
-                    <div class="col-11 d-flex align-items-center justify-content-center">
-                        <p class="no-margin">Elfogadom a fizetési kötelezettségem, valamint hogy terhes vagyok</p>
+            <div id="mainT">
+                <form id="rendelForm" class="row w-50 d-flex align-items-center justify-content-center">
+                    <input type="text" placeholder="Teljes név:" id="nev" required class="form-control my-2">
+                    <input type="email" placeholder="E-mail:" id="email" required class="form-control my-2">
+                    <input type="text" placeholder="Telefonszám: pl. +36" id="tel" required class="form-control my-2">
+                    <input type="text" placeholder="Település:" id="telepules" required class="form-control my-2">
+                    <input type="text" placeholder="Utca, házszám:" id="utca" required class="form-control my-2">
+                    <div class="row kot w-100 p-2">
+                        <div class="col-11 d-flex align-items-center justify-content-center">
+                            <p class="no-margin">Elfogadom a fizetési kötelezettségem, valamint hogy terhes vagyok</p>
+                        </div>
+                        <div class="col-1 d-flex align-items-center justify-content-center">
+                            <input type="checkbox" id="rendelElfogad">
+                        </div>
                     </div>
-                    <div class="col-1 d-flex align-items-center justify-content-center">
-                        <input type="checkbox" id="rendelElfogad">
+                    <div class="row d-flex align-items-center justify-content-center">
+                        <button class="btn btn-success my-2 w-25" type="submit">Rendelés leadása</button>
                     </div>
-                </div>
-                <div class="row d-flex align-items-center justify-content-center">
-                    <button class="btn btn-success my-2 w-25" type="submit">Rendelés leadása</button>
-                </div>
-            </form>
-        </div>
+                </form>
+            </div>
+            </div>
     </div>
     <div class="container-fluid w-100" id="footer">
         <div class="row d-flex align-items-center justify-content-around">
@@ -81,6 +83,8 @@
         let kosarDB = document.getElementById("kosarDB2");
         let kosar = JSON.parse(localStorage.getItem("kosar"));
 
+        const rendelForm = document.getElementById("rendelForm");
+
         if(!kosar){
             kosar=[];
         }
@@ -92,6 +96,18 @@
         }
         kosarDB.textContent=osszesDb;
 
+        if(osszesDb===0){
+            document.getElementById("mainT").style.display = "none";
+        } else{
+            document.getElementById("mainT").style.display = "flex";
+        }
+
+
+        let nev = document.getElementById("nev");
+        let email = document.getElementById("email");
+        let tel = document.getElementById("tel");
+        let telepules = document.getElementById("telepules");
+        let utca = document.getElementById("utca");
 
     </script>
 </body>
