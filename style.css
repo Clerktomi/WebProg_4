@@ -91,3 +91,24 @@ table{
 .no-margin{
     margin: 0;
 }
+
+.elegans-cim {
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 2px;
+             text-shadow:
+            -1px -1px 0 #000,
+            1px -1px 0 #000,
+            -1px  1px 0 #000,
+            1px  1px 0 #000;
+}
+
+.single-img {
+            max-width: 250px;
+            width: 100%;
+            height: auto;
+}
+
+.custom-btn {
+            display: inline-block;   
+            padding-bottom: 20px;     
+}
