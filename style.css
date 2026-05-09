@@ -29,6 +29,17 @@ body{
     border-radius: 8px;
 }
 
+.termek:hover h2{
+    color:  rgb(255, 225, 0);
+}
+
+.termek:hover button{
+    background-color: rgb(20, 175, 66);
+    border: 1px solid rgb(20, 175, 66);
+}
+
+
+
 #footer{
     margin-top: 30vh;
     padding-top: 15px;
