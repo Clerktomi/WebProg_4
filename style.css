@@ -122,3 +122,9 @@ table{
     border-radius: 5px;
     margin-left: 3px;
 }
+
+.card.stkartya {
+    background-color: #212529;
+    color: white;
+    border: 1px solid #444;;
+}

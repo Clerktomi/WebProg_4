@@ -48,10 +48,10 @@
 
             <p class="bg-dark text-white p-2 rounded">
                 <br>
-                1013 Budapest, Döbrentei u. 22. <br>
+                5310 Kisújszállás, Z. Csaba u. 22. <br>
 
                 +36 30 769 1788<br>
-                info@zileat.hu<br><br>
+                info@szaboeketterme.hu<br><br>
 
                 Asztalfoglaláshoz kérlek írj nekünk, vagy telefonálj! <br> <br>
 
@@ -66,14 +66,6 @@
             </p>
 
         </div>
-
-
-
-
-
-
-
-
 
 
         <div class="col-md-6">
@@ -95,11 +87,17 @@
                 <div class="col-11 d-flex align-items-center justify-content-center">
                     <p class="no-margin">Elfogadom az adatkezelési tájékoztatót!</p>
                 </div>
+
+                
                         
             </div>
 
+           
+
         </div>
         </div>
+
+         <button onclick="mentes()" class="btn btn-dark w-100 mt-3 justify-content-center text-center ">Foglalás mentése</button>
     </div>
     
 
@@ -126,6 +124,28 @@
             <p class="text-center mt-2">Készítette: Szabó Lili Hanna és Szabó Tamás</p>
         </div>
     </div>
+
+
+
+    <script>
+function mentes() {
+    const adat = {
+        nev: document.getElementById("nev").value,
+        tel: document.getElementById("tel").value,
+        email: document.getElementById("email").value,
+        uzenet: document.getElementById("uzenet").value,
+        elfogad: document.getElementById("rendelElfogad").checked
+    };
+
+    let foglalasok = JSON.parse(localStorage.getItem("foglalasok")) || [];
+
+    foglalasok.push(adat);
+
+    localStorage.setItem("foglalasok", JSON.stringify(foglalasok));
+
+    alert("Sikeres mentés!");
+}
+</script>
 
 </body>
 </html>

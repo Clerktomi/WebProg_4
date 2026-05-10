@@ -73,6 +73,8 @@
             </table>
         </div>
     </div>
+
+    <div id="lista" class="bg-dark text-white"></div>
     <div class="container-fluid w-100" id="footer">
         <div class="row d-flex align-items-center justify-content-around">
             <div class="col-4 d-flex align-items-center justify-content-center">
@@ -240,6 +242,46 @@
             `;
             rendelTable.innerHTML += uj;     
         }
-    </script>
+
+
+        
+
+function megjelenit() {
+    let foglalasok = JSON.parse(localStorage.getItem("foglalasok")) || [];
+    let lista = document.getElementById("lista");
+
+    lista.innerHTML = "";
+
+    for (let i = 0; i < foglalasok.length; i++) {
+        let adat = foglalasok[i];
+
+        lista.innerHTML += `
+        <div class="card stkartya  p-3">
+            <p><b>Név:</b> ${adat.nev}</p>
+            <p><b>Telefon:</b> ${adat.tel}</p>
+            <p><b>Email:</b> ${adat.email}</p>
+            <p><b>Üzenet:</b> ${adat.uzenet}</p>
+            <button class="btn btn-danger mt-2" onclick="torles(${i})">Törlés</button>
+        </div>
+        `;
+    }
+}
+
+function torles(index) {
+    let foglalasok = JSON.parse(localStorage.getItem("foglalasok")) || [];
+    let ujTomb = [];
+
+    for (let i = 0; i < foglalasok.length; i++) {
+        if (i !== index) {
+            ujTomb.push(foglalasok[i]);
+        }
+    }
+
+    localStorage.setItem("foglalasok", JSON.stringify(ujTomb));
+    megjelenit();
+}
+
+    megjelenit();
+</script>
 </body>
 </html>
