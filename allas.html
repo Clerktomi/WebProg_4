@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kontakt</title>
+    <title>Álláshirdetés</title>
     <link rel="icon" type="image/x-icon" href="src/logo.avif">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
@@ -35,40 +35,89 @@
             </div>
         </div>
 
+    <div class="row">
+        
+        <br>
+        <h2 class="text-center text-white elegans-cim">Csatlakozz csapatunkhoz!</h2>
+
+        <p class="bg-dark text-white p-2 rounded">Dinamikusan fejlődő éttermünkbe keresünk új munkatársakat, ahová akár diákok jelentkezését is örömmel fogadjuk, a betöltött 17. életkor ugyanis a felvétel egyik alapfeltétele. A munkakezdéshez elengedhetetlen az érvényes egészségügyi kiskönyv és a tüdőszűrő lelet megléte. Vendégeink elégedettsége érdekében elvárjuk az ápolt megjelenést, a pontos munkakezdést, valamint a kiváló kommunikációs készséget. Ha szeretsz csapatban dolgozni és jól bírod a pörgést, nálunk a helyed. A szakmai tapasztalat és az idegennyelv-tudás előnyt jelent, de nem feltétel a jelentkezéshez.</p>
+
+
+        <div class="col-md-6">
+
+            <br>
+
+            <input type="text" placeholder="Név*" id="nev" required class="form-control my-2 bg-dark text-white feher">
+            <input type="text" placeholder="Telefonszám*" id="tel" required class="form-control my-2 bg-dark text-white feher">
+            <input type="email" placeholder="Értesítendő E-mail cím*" id="email" required class="form-control my-2 bg-dark text-white feher">
+
+
+            <input type="date" id="szuletesiDatum" required class="form-control my-2 bg-dark text-white feher" placeholder="Születési dátum*">
 
 
 
+            <select id="pozicio" required class="form-control my-2 bg-dark text-white feher">
+                <option value="" disabled selected>Megpályázott pozíció*</option>
+                <option value="pultos">Pultos</option>
+                <option value="felszolgalo">Felszolgáló</option>
+                <option value="konyhai-kisegito">Konyhai kisegítő</option>
+                <option value="mosogato">Mosogató</option>
+                <option value="egyeb">Egyéb</option>
+            </select>
 
-        <h2 class="text-center" id="ures"></h2>
-        <div class="row g-3 my-4 d-flex align-items-center justify-content-center">
-            <div id="mainT">
-               <div class="col-12 d-flex align-items-center justify-content-center">
-                 <form id="rendelForm" class="row w-50 d-flex align-items-center justify-content-center">
-                    <input type="text" placeholder="Név*" id="nev" required class="form-control my-2 bg-dark text-white feher">
-                    <input type="text" placeholder="Telefonszám*" id="tel" required class="form-control my-2 bg-dark text-white feher">
-                    <input type="email" placeholder="E-mail*" id="email" required class="form-control my-2 bg-dark text-white feher">
-                    <textarea name="uzenet" id="uzenet" rows="8.8" cols="84" placeholder="Üzenet...*:" class="rounded bg-dark text-white feher"></textarea><br>
 
-                    <div class="row sotet bg-dark w-100 p-2">
+            <select id="foglalkoztatas" required class="form-control my-2 bg-dark text-white feher">
+                <option value="" disabled selected>Foglalkoztatás formája*</option>
+                <option value="foallas">Főállás</option>
+                <option value="reszmunkaido">Részmunkaidő</option>
+                <option value="diakmunka">Diákmunka</option>
+            </select>
 
-                        <div class="col-1 d-flex align-items-center justify-content-center">
-                            <input type="checkbox" id="rendelElfogad">
-                        </div>
+
+            <label class="text-white mt-2 bg-dark rounded p-1">Önéletrajz feltöltése (PDF, DOCX)*</label>
+            <input type="file" id="oneletrajz" accept=".pdf,.doc,.docx"
+            class="form-control my-2 bg-dark text-white feher" required>
+            
+           
+
+           
+
+        </div>
+
+
+        <div class="col-md-6">
+
+
+
+            <br>
+            <textarea name="uzenet" id="uzenet" rows="13" cols="84" placeholder=" Bemutatkozás...*:" class="rounded bg-dark text-white feher"></textarea><br>
+
+
+             <div class="row sotet bg-dark w-100 p-2">
+
+                <div class="col-1 d-flex align-items-center justify-content-center">
+                    <input type="checkbox" id="rendelElfogad">
+                </div>
                         
-                        <div class="col-11 d-flex align-items-center justify-content-center">
-                            <p class="no-margin">Elfogadom az adatkezelési tájékoztatót!</p>
-                        </div>
-                    </div>
+                <div class="col-11 d-flex align-items-center justify-content-center">
+                    <p class="no-margin">Elfogadom az adatkezelési tájékoztatót!</p>
+                </div>
 
-
-
-                    <div class="row d-flex align-items-center justify-content-center">
-                        <button onclick="mentes()" class="btn btn-dark w-100 mt-3 justify-content-center text-center ">Jelentkezés elküldése</button>
-                    </div>
-                </form>
-               </div>
+                
+                        
             </div>
-            </div>
+
+
+        </div>
+
+    </div>
+
+         <button onclick="mentes()" class="btn btn-dark w-100 mt-3 justify-content-center text-center ">Foglalás mentése</button>
+    
+    
+
+    
+
 
 
 
