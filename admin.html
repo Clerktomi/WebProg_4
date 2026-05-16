@@ -74,12 +74,12 @@
         </div>
     </div>
 
-
-   <div class="container mt-5">
-    <h2 class="text-center">Beérkezett jelentkezések</h2>
-    <div id="adatok" class="mt-4"></div>
+    <div class="container mt-5">
+    <h2 class="text-center">Beérkezett jelentkezési adatok</h2>
+    <div id="adatok" class="mt-4 p-4 bg-secondary rounded"></div>
     </div>
 
+ 
     <div id="lista" class="bg-dark text-white"></div>
     <div class="container-fluid w-100" id="footer">
         <div class="row d-flex align-items-center justify-content-around">
@@ -295,27 +295,25 @@ function torles(index) {
 
 
 
-const osszes = JSON.parse(localStorage.getItem("jelentkezesAdatok")) || [];
 
-let kiir = "";
 
-osszes.forEach((adat, index) => {
-    kiir += `
-        <div style="background:#222;color:white;padding:15px;margin-bottom:15px;border-radius:8px">
-            <h4>Jelentkező #${index + 1}</h4>
-            <p><b>Név:</b> ${adat.nev}</p>
-            <p><b>Telefon:</b> ${adat.tel}</p>
-            <p><b>Email:</b> ${adat.email}</p>
-            <p><b>Születési dátum:</b> ${adat.szuletesiDatum}</p>
-            <p><b>Pozíció:</b> ${adat.pozicio}</p>
-            <p><b>Foglalkoztatás:</b> ${adat.foglalkoztatas}</p>
-            <p><b>Bemutatkozás:</b> ${adat.uzenet}</p>
-            <p><b>Önéletrajz:</b> ${adat.fajlNev}</p>
-        </div>
-    `;
-});
 
-document.getElementById("adatok").innerHTML = kiir || "<p>Még nincs jelentkező.</p>";
+
+const adatok = JSON.parse(localStorage.getItem("jelentkezesAdatok"));
+
+    if(adatok){
+        document.getElementById("adatok").innerHTML = `
+            <p><b>Név:</b> ${adatok.nev}</p>
+            <p><b>Telefon:</b> ${adatok.tel}</p>
+            <p><b>Email:</b> ${adatok.email}</p>
+            <p><b>Születési dátum:</b> ${adatok.szuletesiDatum}</p>
+            <p><b>Pozíció:</b> ${adatok.pozicio}</p>
+            <p><b>Foglalkoztatás:</b> ${adatok.foglalkoztatas}</p>
+            <p><b>Bemutatkozás:</b> ${adatok.uzenet}</p>
+            <p><b>Önéletrajz fájl neve:</b> ${adatok.fajlNev}</p>
+        `;
+    }
 </script>
+
 </body>
 </html>
