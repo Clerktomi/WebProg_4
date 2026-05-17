@@ -75,7 +75,7 @@
     </div>
 
     <div class="container mt-5">
-    <h2 class="text-center">Beérkezett jelentkezési adatok</h2>
+    <h2 class="text-center" id="jelAlert">Beérkezett jelentkezési adatok</h2>
     <div class="col-12">
         <div id="adatok" class="row g-3"></div>
     </div>
@@ -295,6 +295,7 @@ function torles(index) {
     const adatok = JSON.parse(localStorage.getItem("jelentkezesAdatok"));
     // alert(adatok[0].nev)
     if (adatok) {
+        document.getElementById("jelAlert").textContent = "Beérkezett jelentkezési adatok";
         for (let i = 0; i < adatok.length; i++) {
             let uj = `
             <div class="col-12 col-md-4">
@@ -313,6 +314,8 @@ function torles(index) {
             `;
             document.getElementById("adatok").innerHTML += uj;
         }
+    } else{
+        document.getElementById("jelAlert").textContent = "";
     }
 </script>
 
