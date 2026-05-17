@@ -75,8 +75,11 @@
     </div>
 
     <div class="container mt-5">
-    <h2 class="text-center">Beérkezett jelentkezési adatok</h2>
-    <div id="adatok" class="mt-4 p-4 bg-secondary rounded"></div>
+    <h2 class="text-center" id="jelAlert">Beérkezett jelentkezési adatok</h2>
+    <div class="col-12">
+        <div id="adatok" class="row g-3"></div>
+    </div>
+    </div>
     </div>
 
  
@@ -289,29 +292,30 @@ function torles(index) {
 
     megjelenit();
 
-
-
-
-
-
-
-
-
-
-
-const adatok = JSON.parse(localStorage.getItem("jelentkezesAdatok"));
-
-    if(adatok){
-        document.getElementById("adatok").innerHTML = `
-            <p><b>Név:</b> ${adatok.nev}</p>
-            <p><b>Telefon:</b> ${adatok.tel}</p>
-            <p><b>Email:</b> ${adatok.email}</p>
-            <p><b>Születési dátum:</b> ${adatok.szuletesiDatum}</p>
-            <p><b>Pozíció:</b> ${adatok.pozicio}</p>
-            <p><b>Foglalkoztatás:</b> ${adatok.foglalkoztatas}</p>
-            <p><b>Bemutatkozás:</b> ${adatok.uzenet}</p>
-            <p><b>Önéletrajz fájl neve:</b> ${adatok.fajlNev}</p>
-        `;
+    const adatok = JSON.parse(localStorage.getItem("jelentkezesAdatok"));
+    // alert(adatok[0].nev)
+    if (adatok) {
+        document.getElementById("jelAlert").textContent = "Beérkezett jelentkezési adatok";
+        for (let i = 0; i < adatok.length; i++) {
+            let uj = `
+            <div class="col-12 col-md-4">
+                <div class="bg-dark text-white p-3 h-100 rounded">
+                <h2 class="text-center">Jelentkező</h2>
+                <p>Név: ${adatok[i].nev}</p>
+                <p>Telefon: ${adatok[i].tel}</p>
+                <p>Email: ${adatok[i].email}</p>
+                <p>Születési dátum: ${adatok[i].szuletesiDatum}</p>
+                <p>Pozíció: ${adatok[i].pozicio}</p>
+                <p>Foglalkoztatás: ${adatok[i].foglalkoztatas}</p>
+                <p>Bemutatkozás: ${adatok[i].uzenet}</p>
+                <p>Önéletrajz fájl neve: ${adatok[i].fajlNev}</p>
+                </div>
+            </div>
+            `;
+            document.getElementById("adatok").innerHTML += uj;
+        }
+    } else{
+        document.getElementById("jelAlert").textContent = "";
     }
 </script>
 

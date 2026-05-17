@@ -148,7 +148,7 @@ function mentes() {
     }
 
 
-    const adatok = {
+    let adatok = {
         nev: document.getElementById("nev").value,
         tel: document.getElementById("tel").value,
         email: document.getElementById("email").value,
@@ -174,9 +174,17 @@ function mentes() {
         return;
     }
 
+    let StorageAdatok = localStorage.getItem("jelentkezesAdatok");
 
-    localStorage.setItem("jelentkezesAdatok", JSON.stringify(adatok));
+    if (StorageAdatok) {
+        StorageAdatok = JSON.parse(StorageAdatok);
+    } else {
+        StorageAdatok = [];
+    }
 
+    StorageAdatok.push(adatok);
+
+    localStorage.setItem("jelentkezesAdatok", JSON.stringify(StorageAdatok));
 
 }
 </script>
