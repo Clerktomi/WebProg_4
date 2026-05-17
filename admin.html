@@ -80,7 +80,10 @@
         <div id="adatok" class="row g-3"></div>
     </div>
     </div>
-    <div id="lista" class="row text-white g-3 my-2"></div>
+    <div id="MainFoglal">
+        <h2 class="text-center bg-dark rounded my-2 p-1">Asztal foglalások</h2>
+        <div id="lista" class="row text-white g-3 my-2"></div>
+    </div>
     </div>
 
  
@@ -258,25 +261,30 @@ function megjelenit() {
 
     lista.innerHTML = "";
 
-    for (let i = 0; i < foglalasok.length; i++) {
-        let adat = foglalasok[i];
-
-        lista.innerHTML += `
-        <div class="col-md-4">
-            <div class="bg-dark stkartya p-3 h-100 rounded">
-                <p><b>Név:</b> ${adat.nev}</p>
-                <p><b>Telefon:</b> ${adat.tel}</p>
-                <p><b>Email:</b> ${adat.email}</p>
-                <p><b>Üzenet:</b> ${adat.uzenet}</p>
-
-                <button class="btn btn-danger mt-2" onclick="torles(${i})">
-                    Törlés
-                </button>
+    if(foglalasok){
+        for (let i = 0; i < foglalasok.length; i++) {
+            let adat = foglalasok[i];
+    
+            lista.innerHTML += `
+            <div class="col-md-4">
+                <div class="bg-dark stkartya p-3 h-100 rounded">
+                    <p><b>Név:</b> ${adat.nev}</p>
+                    <p><b>Telefon:</b> ${adat.tel}</p>
+                    <p><b>Email:</b> ${adat.email}</p>
+                    <p><b>Üzenet:</b> ${adat.uzenet}</p>
+    
+                    <button class="btn btn-danger mt-2" onclick="torles(${i})">
+                        Törlés
+                    </button>
+                </div>
             </div>
-        </div>
-        `;
+            `;
+        }
+        document.getElementById("MainFoglal").style.display = "block";
+    }   else if(foglalasok.length === 0){
+    document.getElementById("MainFoglal").style.display = "none";
     }
-}
+} 
 
 function torles(index) {
     let foglalasok = JSON.parse(localStorage.getItem("foglalasok")) || [];
